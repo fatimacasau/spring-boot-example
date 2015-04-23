@@ -10,7 +10,7 @@ public class HelloController {
     @Autowired
     PersonRepository personRepository
 
-    @RequestMapping("/")
+    @RequestMapping("/hello")
     public String index() {
         Person p = personRepository.findAll()[0]
         return "Hello ${p.firstName}! You are in SpringIO '15!";
