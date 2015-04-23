@@ -1,14 +1,19 @@
 package example
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 public class HelloController {
 
+    @Autowired
+    PersonRepository personRepository
+
     @RequestMapping("/")
     public String index() {
-        return "Hello SpringIO '15";
+        Person p = personRepository.findAll()[0]
+        return "Hello ${p.firstName}! You are in SpringIO '15!";
     }
 
 }
