@@ -12,10 +12,10 @@ interface PersonRepository extends CrudRepository<Person,Long> {
 
     List<Person> findByLastName(@Param("lastname") String lastname)
 
-    @Query("select p from Person p where p.firstName like %?1")
+    @Query("select p from Person p where p.firstName like %:firstname")
     List<Person> findByFirstNameEndsWith(@Param("firstname") String firstname)
 
-    @Query(value = "SELECT * FROM PERSON WHERE AGE BETWEEN ?1 AND ?2", nativeQuery = true)
+    @Query(value = "SELECT * FROM PERSON WHERE AGE BETWEEN :from AND :to", nativeQuery = true)
     List<Person> findByAgeBetween(@Param("from") Integer from, @Param("to") Integer to)
 
     @Query("select p from Person p where p.firstName = :firstname or p.lastName = :lastname")
