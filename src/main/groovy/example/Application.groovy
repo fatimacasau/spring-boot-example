@@ -16,6 +16,15 @@ public class Application {
         Person p = new Person(firstName: "Fatima",lastName: "Casau", age: 29)
         p = repository.save(p)
         println p
+
+        println repository.findByAgeBetween(0,30)
+
+        println repository.findByFirstNameEndsWith("a")
+
+        println repository.findByLastName("Casau")
+
+        println repository.findByLastnameOrFirstname("","Fatima")
+
     }
 
 }
