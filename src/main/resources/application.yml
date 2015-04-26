@@ -1,0 +1,12 @@
+spring:
+  profiles.active: default
+---
+spring:
+  profiles: default
+# server config
+server.port: 8080
+server.context-path: /springbootexample
+# config properties
+foo:
+  firstProperty: firstFooProperty
+  secondProperty: secondFooProperty
