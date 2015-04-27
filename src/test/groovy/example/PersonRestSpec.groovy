@@ -15,8 +15,11 @@ import static groovyx.net.http.ContentType.JSON
 
 @WebAppConfiguration
 @ContextConfiguration(loader = SpringApplicationContextLoader.class,classes = [Application.class])
-@IntegrationTest("server.port:8080")
+@IntegrationTest("server.port:0")
 class PersonRestSpec extends Specification {
+
+    @Value("\${local.server.port}")
+    int port;
 
     @Value("\${server.context-path}")
     String contextPath
@@ -27,7 +30,7 @@ class PersonRestSpec extends Specification {
     @Unroll
     def "create new person via REST with different params: #params"(){
         setup: "people uri"
-            RESTClient rest = new RESTClient("http://localhost:8080")
+            RESTClient rest = new RESTClient("http://localhost:$port")
             def uri = "$contextPath/people"
         expect: "status ok"
             result == rest.post(requestContentType : JSON, path : uri, body : params).status
@@ -39,7 +42,7 @@ class PersonRestSpec extends Specification {
 
     def "find a person via REST"(){
         given: "an existing person"
-            RESTClient rest = new RESTClient("http://localhost:8080")
+            RESTClient rest = new RESTClient("http://localhost:$port")
             def person = personRepository.findAll()[0]
         and: "people uri"
             def uri = "$contextPath/people/${person.id}"
