@@ -4,8 +4,4 @@ spring:
 spring:
   profiles: default
 # server config
-server.context-path: /springbootexample
-# config properties
-foo:
-  firstProperty: firstFooProperty
-  secondProperty: secondFooProperty
+server.context-path: /spring-boot-example

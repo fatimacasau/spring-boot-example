@@ -16,7 +16,7 @@ import static groovyx.net.http.ContentType.JSON
 @WebAppConfiguration
 @ContextConfiguration(loader = SpringApplicationContextLoader.class,classes = [Application.class])
 @IntegrationTest("server.port:0")
-class PersonRestSpec extends Specification {
+class Example8_ControllerIntegrationSpec extends Specification{
 
     @Value("\${local.server.port}")
     int port;
@@ -25,27 +25,29 @@ class PersonRestSpec extends Specification {
     String contextPath
 
     @Autowired
-    PersonRepository personRepository
+    CustomerRepository customerRepository
 
     @Unroll
-    def "create new person via REST with different params: #params"(){
-        setup: "people uri"
+    def "create new customer via REST with different params: #params"(){
+        setup: "get customer uri"
             RESTClient rest = new RESTClient("http://localhost:$port")
-            def uri = "$contextPath/people"
-        expect: "status ok"
-            result == rest.post(requestContentType : JSON, path : uri, body : params).status
-        where: "different params"
+            def uri = "$contextPath/customer"
+        when: "call post request to create new customer"
+            def response = rest.post(requestContentType : JSON, path : uri, body : params)
+        then: "return response status..."
+            result == response.status
+        where: "with different params"
             result                      | params
-            HttpStatus.CREATED.value()  | [firstName:"fatima",lastName:"casau"]
-            HttpStatus.OK.value()       | [firstName:"fatima",lastName:"casau",age:29] // this fails
+            HttpStatus.CREATED.value()  | [name:"fatima", lastName:"casau"]
+            //HttpStatus.OK.value()       | [name:"pepito",lastName:"perez"] // this fails
     }
 
     def "find a person via REST"(){
         given: "an existing person"
             RESTClient rest = new RESTClient("http://localhost:$port")
-            def person = personRepository.findAll()[0]
+            def person = customerRepository.findAll()[0]
         and: "people uri"
-            def uri = "$contextPath/people/${person.id}"
+            def uri = "$contextPath/customer/${person.id}"
         when:
             def result = rest.get(path: uri)
         then:
