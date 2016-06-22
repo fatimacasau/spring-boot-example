@@ -12,9 +12,10 @@ class Example5_ExceptionsSpec extends Specification{
             customer.name
         then:'throw a nullpointerexception'
             thrown NullPointerException
-//        when: 'try to call toString method'
+//      This block fails
+//      when: 'try to call toString method'
 //            customer.toString()
-//        then:'throw a nullpointerexception'
+//      then:'throw a nullpointerexception'
 //            thrown NullPointerException
     }
 

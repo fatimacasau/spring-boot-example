@@ -6,6 +6,7 @@ import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.web.WebAppConfiguration
 import spock.lang.Ignore
+import spock.lang.IgnoreRest
 import spock.lang.Specification
 
 @WebAppConfiguration
@@ -68,6 +69,6 @@ class Example2_BlocksSpec extends Specification {
         given:'an existing customer'
             def customer = customerRepository.findByLastName(myLastName)
         expect: 'the myName is not expected'
-            customer.name == "Patricia"
+            customer.name == "Patricia" // This fails
     }
 }

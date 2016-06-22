@@ -36,7 +36,8 @@ class Example1_IntroSpec extends Specification {
 
     // Feature Methods
 
-    def "Change shareable and instance field first time"(){
+    def """Change shareable and instance
+            field first time"""(){
         setup:
             sharedCount++
             fieldCount++

@@ -24,8 +24,8 @@ class Example6_MockingAndStubbingSpec extends Specification{
 
         then:
             1 * mockedNotificationService.sendWelcomeMessage(_, "Hi, welcome!")
-            //1 * mockedNotificationService.sendWelcomeMessage(_, "Hi, !")
-            //0 * mockedNotificationService.sendErrorMessage(_, _)
+           // 1 * mockedNotificationService.sendWelcomeMessage(_, "Hi, ") // This fails
+            0 * mockedNotificationService.sendErrorMessage(_, _)
     }
 
     void 'Send error notificacion when customer is not created'() {

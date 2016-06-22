@@ -42,7 +42,7 @@ class Example3_DataDrivenTestingSpec extends Specification{
             Math.min(x, y) == result
         where:
             x  | y  || result
-            2  | 5  || 2
+            // 2  | 5  || 5 // This fails
             -1 | -3 || -3
             1  | 0  || 0
     }
